@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ContactPicker</string>
+    <string name="pick_a_contact">Pick a Contact</string>
+    <string name="no_contact_details_picked">No Contact Details Picked</string>
+
+</resources>
