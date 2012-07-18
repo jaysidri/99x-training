@@ -1,0 +1,11 @@
+<resources>
+
+    <string name="app_name">HelloWordApplication</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">HelloWorld</string>
+    <string name="hello_world_landscape">Hello World - LANDSCAPE</string>
+    <string name="hello_world_portrait">Hello world - PORTRAIT!</string>
+    
+
+</resources>
