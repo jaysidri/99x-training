@@ -10,8 +10,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
-	
-	Button btnHello =  null;
+
+	Button btnHello = null;
 	TextView txtReturn = null;
 
 	private final static String TAG = "MainActivity";
@@ -23,11 +23,9 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 
 		Log.d(TAG, "onCreate called");
-		
-		
+
 		btnHello = (Button) findViewById(R.id.btnHello);
 		txtReturn = (TextView) findViewById(R.id.txtReturn);
-	
 
 	}
 
@@ -76,39 +74,41 @@ public class MainActivity extends Activity {
 		getMenuInflater().inflate(R.menu.activity_main, menu);
 		return true;
 	}
-	
+
 	public void onClick(View v) {
-		
-		Intent intent = new Intent(this, SecondActivity.class);
-		
-		Bundle bundle = new Bundle();
-		
-		bundle.putString("name", "John");
-		
-		intent.putExtras(bundle);
 
-		
-		//startActivity(intent);
-		
-		startActivityForResult(intent, 1);
+		switch (v.getId()) {
+		case R.id.btnHello:
 
-		
-		
+			Intent intent = new Intent(this, SecondActivity.class);
+
+			Bundle bundle = new Bundle();
+
+			bundle.putString("name", "John");
+
+			intent.putExtras(bundle);
+
+			startActivityForResult(intent, 1);
+			break;
+			
+		case R.id.btnQuit:
+			finish();
+
+		}
+
 	}
-	
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		
-		if( resultCode != RESULT_OK) return;
-		
+
+		if (resultCode != RESULT_OK)
+			return;
+
 		super.onActivityResult(requestCode, resultCode, data);
-		
+
 		Bundle bundle = data.getExtras();
-		
-		
+
 		txtReturn.setText(bundle.getString("return"));
 	}
-
-	
 
 }
