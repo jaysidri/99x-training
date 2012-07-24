@@ -1,64 +1,44 @@
 package com.jahufar.android.training.allaboutlists;
 
-import java.util.ArrayList;
-
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.Toast;
 
-public class MainActivity extends Activity implements OnItemClickListener {
-
-	ListView listData = null;
-
-	ArrayList<String> data = new ArrayList<String>();
-
-	ArrayAdapter<String> adapter = null;
+public class MainActivity extends Activity {
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState) {
+
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
 
-		listData = (ListView) findViewById(R.id.listviewData);
-
-		data = loadData();
-
-		adapter = new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_1, android.R.id.text1, data);
-
-		listData.setAdapter(adapter);
-
-		listData.setOnItemClickListener(this);
-
-		listData.setEmptyView(findViewById(R.id.txtNoData));
-
+		setContentView(R.layout.main);
 	}
 
-	private ArrayList<String> loadData() {
+	public void onClick(View v) {
+		
+		Intent intent =  null;
+		Class activityName = null;
 
-		for (int i = 0; i <= 30; i++) {
-			data.add("Item " + i);
+		switch (v.getId()) {
+		case R.id.cmdlist:
+			activityName = ListViewActivity.class;
+			break;
+		
+		case R.id.cmdListActivity:
+			activityName = ListActivityActivity.class;
+			break;
+			
+			
+		case R.id.cmdCustomlist:
+			activityName= CustomListActivity.class;
+			break;
+
 		}
-
-		return data;
-
-	}
-
-	@Override
-	public void onItemClick(AdapterView<?> parent, View view, int position,
-			long id) {
-
-		Log.d(getClass().getName(), data.get(position));
-
-		Toast.makeText(this, "Clicked : " + data.get(position),
-				Toast.LENGTH_SHORT).show();
-
+		
+		intent = new Intent(this, activityName);
+		
+		startActivity(intent);
 	}
 
 }

@@ -32,13 +32,13 @@ public class CustomListActivity extends ListActivity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 
-		setContentView(R.layout.listactivitylayout);
+		setContentView(R.layout.listactivity);
 
 		data = loadData();
 
-		//adapter = new ArrayAdapter<Address>(this,
-			//	android.R.layout.simple_list_item_1, android.R.id.text1, data);
-		
+		// adapter = new ArrayAdapter<Address>(this,
+		// android.R.layout.simple_list_item_1, android.R.id.text1, data);
+
 		adapter = new CustomAdapter(this, R.layout.custom_row, data);
 
 		setListAdapter(adapter);
@@ -48,19 +48,20 @@ public class CustomListActivity extends ListActivity {
 	private class CustomAdapter extends ArrayAdapter<Address> {
 
 		private Context context = null;
-		ArrayList<Address> data = null;
-		
-		
+		private ArrayList<Address> data = null;
+		private int layout = 0;
+
 		TextView txtName = null;
 		TextView txtEmail = null;
 
-		public CustomAdapter(Context context, int textViewResourceId,
+		public CustomAdapter(Context context, int viewResourceId,
 				ArrayList<Address> objects) {
 
-			super(context, textViewResourceId, objects);
+			super(context, viewResourceId, objects);
 
 			this.context = context;
 			this.data = objects;
+			this.layout = viewResourceId;
 
 		}
 
@@ -69,24 +70,24 @@ public class CustomListActivity extends ListActivity {
 
 			LayoutInflater inflator = (LayoutInflater) this.context
 					.getSystemService(LAYOUT_INFLATER_SERVICE);
-			
+
 			View view = null;
-			
-			view = inflator.inflate(R.layout.custom_row, null);
-			
+
+			view = inflator.inflate(this.layout, null);
+
 			txtName = (TextView) view.findViewById(R.id.txtName);
 			txtEmail = (TextView) view.findViewById(R.id.txtEmail);
-			
+
 			txtName.setText(this.data.get(position).getName());
 			txtEmail.setText(this.data.get(position).getName());
-			
-			
 
 			return view;
 
 		}
 
 	}
+
+
 
 	private ArrayList<Address> loadData() {
 

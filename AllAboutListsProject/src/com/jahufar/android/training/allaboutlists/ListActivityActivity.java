@@ -28,9 +28,9 @@ public class ListActivityActivity extends ListActivity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 
-		setContentView(R.layout.listactivitylayout);
+		setContentView(R.layout.listactivity);
 
-		//data = loadData();
+		data = loadData();
 
 		adapter = new ArrayAdapter<Address>(this,
 				android.R.layout.simple_list_item_1, android.R.id.text1, data);
