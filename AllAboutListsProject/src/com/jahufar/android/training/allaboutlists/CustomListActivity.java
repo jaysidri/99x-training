@@ -45,14 +45,22 @@ public class CustomListActivity extends ListActivity {
 
 	}
 
+	private static class ViewHolder {
+		public TextView txtEmail = null;
+		public TextView txtName = null;
+
+		public ViewHolder(View view) {
+			txtEmail = (TextView) view.findViewById(R.id.txtEmail);
+			txtName = (TextView) view.findViewById(R.id.txtName);
+		}
+
+	}
+
 	private class CustomAdapter extends ArrayAdapter<Address> {
 
 		private Context context = null;
 		private ArrayList<Address> data = null;
 		private int layout = 0;
-
-		TextView txtName = null;
-		TextView txtEmail = null;
 
 		public CustomAdapter(Context context, int viewResourceId,
 				ArrayList<Address> objects) {
@@ -68,26 +76,30 @@ public class CustomListActivity extends ListActivity {
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 
-			LayoutInflater inflator = (LayoutInflater) this.context
-					.getSystemService(LAYOUT_INFLATER_SERVICE);
+			ViewHolder viewHolder = null;
 
-			View view = null;
+			if (convertView == null) {
+				LayoutInflater inflator = (LayoutInflater) this.context
+						.getSystemService(LAYOUT_INFLATER_SERVICE);
 
-			view = inflator.inflate(this.layout, null);
+				convertView = inflator.inflate(this.layout, null);
 
-			txtName = (TextView) view.findViewById(R.id.txtName);
-			txtEmail = (TextView) view.findViewById(R.id.txtEmail);
+				viewHolder = (ViewHolder) convertView.getTag();
+			}
 
-			txtName.setText(this.data.get(position).getName());
-			txtEmail.setText(this.data.get(position).getName());
+			if (viewHolder == null) {
+				viewHolder = new ViewHolder(convertView);
+				convertView.setTag(viewHolder);
+			}
 
-			return view;
+			viewHolder.txtEmail.setText(this.data.get(position).getName());
+			viewHolder.txtName.setText(this.data.get(position).getName());
+
+			return convertView;
 
 		}
 
 	}
-
-
 
 	private ArrayList<Address> loadData() {
 
